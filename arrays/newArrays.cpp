@@ -18,7 +18,6 @@ int main() {
     // Dynamic array - flexible size, manual cleanup required
     cout << "Dynamic array size: " << size << endl;
     cout << "Size of dynamic array in bytes: " << sizeof(int) * size << endl;
-    cout << "Size of dynamic array in bytes: " << sizeof(dynamicArray) << endl;
     
     // show how elemetns can be added to the dynamic array
     for (int i = 0; i < size; i++) {
