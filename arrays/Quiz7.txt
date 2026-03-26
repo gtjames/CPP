@@ -1,0 +1,32 @@
+What is the Output of the following blocks of code
+int nums[] = {1, 2, 3, 4};
+for(int I = 0; I < 4; I += 2)
+      nums[i] *= 2;
+cout << nums[0] << " " << nums[1] << " " << nums[2] << " " << nums[3];
+
+-----------------------
+
+int * nums = new int[5];
+nums[0] = 10;
+*(nums+2) = 20;
+cout << nums[0] <<  " " << nums[1] << " " << nums[2] << endl;
+
+-----------------------
+
+int * nums = new int[5];
+cout << nums[50] << endl;
+
+-----------------------
+
+string names[5] = { "CMU", "Mavericks", "Grand", "Junction", "Colorado"};
+string * pNames = names;
+cout << pNames[1] << endl;
+cout << *pNames << endl;
+
+Create a static array of 30 floats
+Create a dynamic array of 30 strings
+Create a 2-dimensional static array ints. 5 row and 6 columns
+Where is a static variable stored
+Where is a dynamic variable stored
+Calculate the average of an array using an array function
+Create a 2-dimensional static array ints. 5 row and 6 columns

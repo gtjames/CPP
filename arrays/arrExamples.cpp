@@ -113,5 +113,10 @@ int main() {
     });
     cout << "\n\n";
 
+    string names[5] = { "CMU", "Mavericks", "Grand", "Junction", "Colorado"};
+    string * pNames = names;
+    cout << pNames[1] << endl;
+    cout << *pNames << endl;
+
     return 0;
 }
