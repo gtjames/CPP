@@ -5,7 +5,6 @@
 
 #include <algorithm>
 #include <ranges>
-
 #include <iomanip>
 
 using namespace std;
