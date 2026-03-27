@@ -7,7 +7,7 @@ int main() {
     char   letters[]  = {'a', 'b', 'c', 'd', 'e'};
     //  or we create the array with size and init the values individually
     string letters2[5];
-    letters2[0] = "a";
+    letters2[0] = letters[4];
     letters2[1] = "b";
     letters2[2] = "c";
     letters2[3] = "d";
@@ -37,7 +37,6 @@ int main() {
     cout << "Adrs pArr+1: " << pArr << endl;
     for(int i=0; i<size; i++)
         cout << *(pArr+i) << " " << pArr[i] << endl;
-
 
     float grades[] = {90.5f, 34.5f, 56, 81.f, 99.f, 100, 89.9};
     // size_t is an unsigned integral type, which is the result of the sizeof operator and is used to represent sizes and counts.

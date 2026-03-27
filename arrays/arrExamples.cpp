@@ -28,6 +28,7 @@ int main() {
     // which would you rather use?? 
     int arr1a[] = {5, 2, 8, 1, 9};
     sort(arr1a, arr1a + size1);
+    // sort(arr1a, arr1a + size1, [](int a, int b) { return a < b; });
     cout << "Sorted (ascending):  ";
     for (int x : arr1a) cout << x << " ";
     cout << "\n";
