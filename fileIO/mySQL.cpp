@@ -22,7 +22,7 @@ int main() {
     vector<Crime> crimes;
 
     try {
-        Session session("localhost", 33060, "root", "!Anguilla76");
+        Session session("localhost", 33060, "root", "password");
 
         Schema db = session.getSchema("examples");
         Table crimesTable = db.getTable("crimes");
