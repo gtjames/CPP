@@ -1,15 +1,21 @@
-# Makefile for grading program
-
 CXX = g++
-CXXFLAGS = -Wall -std=c++11
+CXXFLAGS = -std=c++17 -Wall
 
-all: grading
+# Find all .cpp files
+SRCS = $(wildcard *.cpp)
 
-grading: grading.cpp
-	$(CXX) $(CXXFLAGS) grading.cpp -o grading
+# Convert file.cpp → file
+TARGETS = $(SRCS:.cpp=)
 
-run: grading
-	./grading
+all: $(TARGETS)
 
+mySQL: mySQL.cpp
+	$(CXX) $(CXXFLAGS) mySQL.cpp -o mySQL -I/opt/homebrew/include -L/opt/homebrew/lib -lmysqlcppconnx
+# Rule: build each executable from its .cpp
+%: %.cpp
+	$(CXX) $(CXXFLAGS) $< -o $@
+
+# Clean up executables
 clean:
-	rm -f grading
+	rm -f $(TARGETS)
+
