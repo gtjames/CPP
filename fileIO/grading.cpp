@@ -42,9 +42,9 @@ using namespace std;
 struct Student {
     string firstName;
     string lastName;
-    int test1, test2, test3, test4;
+    int    test1, test2, test3, test4;
     double average;
-    char grade;
+    char   grade;
 };
 
 // remove for now
@@ -168,6 +168,7 @@ for (const auto& stu : students) {
 
     computeClassStats(students, highest, lowest, classAvg);
 
+    //  find ave for each test
     double test1 = accumulate(students.begin(), students.end(), 0.0, [](double sum, const Student& s) { return sum + s.test1; }) / students.size();
     double test2 = accumulate(students.begin(), students.end(), 0.0, [](double sum, const Student& s) { return sum + s.test2; }) / students.size();
     double test3 = accumulate(students.begin(), students.end(), 0.0, [](double sum, const Student& s) { return sum + s.test3; }) / students.size();
