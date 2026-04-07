@@ -2,11 +2,11 @@
 Algorithm:
 1. Prompt user for input file name.
 2. Open input file and read student records:
-   - first name, last name, 4 test scores
+- first name, last name, 4 test scores
 3. Store records in a vector of structs.
 4. For each student:
-   - Compute average score
-   - Determine letter grade
+- Compute average score
+- Determine letter grade
 5. Sort students in descending order by average score.
 6. Prompt user for output file name.
 7. Write formatted report to output file:
@@ -31,6 +31,10 @@ to an output file.
 #include <vector>
 #include <iomanip>
 #include <algorithm>
+#include <functional>
+
+#include <numeric>
+#include <ranges>
 
 using namespace std;
 
@@ -100,6 +104,8 @@ int main() {
     // Prompt for input file
     cout << "Enter input file name: ";
     cin >> inputFile;
+    if(inputFile.length() == 1)
+        inputFile = "students.in";
 
     ifstream inFile(inputFile);
     if (!inFile) {
@@ -134,44 +140,70 @@ int main() {
     }
 
     // Write header
-    outFile << left << setw(12) << "First Name"
-            << setw(12) << "Last Name"
-            << setw(6) << "T1"
-            << setw(6) << "T2"
-            << setw(6) << "T3"
-            << setw(6) << "T4"
-            << setw(10) << "Average"
-            << setw(6) << "Grade" << endl;
-
-    outFile << "-------------------------------------------------------------\n";
+    outFile << setw(78) << setfill('=') << "" << setfill(' ') << endl;
+    outFile << setw(15) << left << "First Name"
+            << setw(15) << "Last Name"
+            << setw(8) << right << "T1"
+            << setw(8) << "T2"
+            << setw(8) << "T3"
+            << setw(8) << "T4"
+            << setw(8) << "Average"
+            << setw(8) << "Grade" << endl;
+        
+    outFile << setw(78) << setfill('=') << "" << setfill(' ') << endl;
 
     // Write student data
-    for (const auto& stu : students) {
-        outFile << left << setw(12) << stu.firstName
-                << setw(12) << stu.lastName
-                << setw(6) << stu.test1
-                << setw(6) << stu.test2
-                << setw(6) << stu.test3
-                << setw(6) << stu.test4
-                << setw(10) << fixed << setprecision(2) << stu.average
-                << setw(6) << stu.grade << endl;
+for (const auto& stu : students) {
+    outFile << setw(15) << left << stu.firstName
+            << setw(15)         << stu.lastName
+            << right << setw(8) << stu.test1
+            << setw(8) << stu.test2
+            << setw(8) << stu.test3
+            << setw(8) << stu.test4
+            << setw(8) << fixed << setprecision(2) << stu.average
+            << setw(8) << stu.grade
+            << endl;
     }
+    outFile << setw(78) << setfill('*') << "" << setfill(' ') << endl;
 
     computeClassStats(students, highest, lowest, classAvg);
 
-    outFile << "\n";
-outFile << "Class Statistics\n";
-outFile << "----------------\n";
+    double test1 = accumulate(students.begin(), students.end(), 0.0, [](double sum, const Student& s) { return sum + s.test1; }) / students.size();
+    double test2 = accumulate(students.begin(), students.end(), 0.0, [](double sum, const Student& s) { return sum + s.test2; }) / students.size();
+    double test3 = accumulate(students.begin(), students.end(), 0.0, [](double sum, const Student& s) { return sum + s.test3; }) / students.size();
+    double test4 = accumulate(students.begin(), students.end(), 0.0, [](double sum, const Student& s) { return sum + s.test4; }) / students.size();
 
-outFile << "Highest Average: " << fixed << setprecision(2) << highest << endl;
-outFile << "Lowest Average : " << fixed << setprecision(2) << lowest << endl;
-outFile << "Class Average  : " << fixed << setprecision(2) << classAvg << endl;
+    //  find max and min for each test
+    int max1 = max_element(students.begin(), students.end(), [](const Student& a, const Student& b) { return a.test1 < b.test1; })->test1;
+    int max2 = max_element(students.begin(), students.end(), [](const Student& a, const Student& b) { return a.test2 < b.test2; })->test2;
+    int max3 = max_element(students.begin(), students.end(), [](const Student& a, const Student& b) { return a.test3 < b.test3; })->test3;
+    int max4 = max_element(students.begin(), students.end(), [](const Student& a, const Student& b) { return a.test4 < b.test4; })->test4;
 
-string topStudent = students.front().firstName + " " + students.front().lastName;
-string lowStudent = students.back().firstName + " " + students.back().lastName;
-    outFile << "Top Student: " << topStudent << endl;
-    outFile << "Low Student: " << lowStudent << endl;
-    
+    int min1 = min_element(students.begin(), students.end(), [](const Student& a, const Student& b) { return a.test1 < b.test1; })->test1;
+    int min2 = min_element(students.begin(), students.end(), [](const Student& a, const Student& b) { return a.test2 < b.test2; })->test2;
+    int min3 = min_element(students.begin(), students.end(), [](const Student& a, const Student& b) { return a.test3 < b.test3; })->test3;
+    int min4 = min_element(students.begin(), students.end(), [](const Student& a, const Student& b) { return a.test4 < b.test4; })->test4;
+
+    outFile << setw(30) << left << "Class Average: " << right << fixed << setprecision(2) << setw(8) << test1 << setw(8) << test2 << setw(8) << test3 << setw(8) << test4 << endl;
+    outFile << setw(30) << left << "Class Max: "     << right << setw(8) << max1 << setw(8) << max2  << setw(8) <<  max3 << setw(8) <<  max4 << endl;
+    outFile << setw(30) << left << "Class Min: "     << right << setw(8) << min1 << setw(8) << min2  << setw(8) <<  min3 << setw(8) <<  min4 << endl;
+    outFile << setw(78) << setfill('=') << "" << setfill(' ') << endl;
+
+    double aCnt = count_if(students.begin(), students.end(), [](const Student& s) { return s.grade == 'A'; }) / static_cast<double>(students.size());
+    double bCnt = count_if(students.begin(), students.end(), [](const Student& s) { return s.grade == 'B'; }) / static_cast<double>(students.size());
+    double cCnt = count_if(students.begin(), students.end(), [](const Student& s) { return s.grade == 'C'; }) / static_cast<double>(students.size());
+    double dCnt = count_if(students.begin(), students.end(), [](const Student& s) { return s.grade == 'D'; }) / static_cast<double>(students.size());
+    double fCnt = count_if(students.begin(), students.end(), [](const Student& s) { return s.grade == 'F'; }) / static_cast<double>(students.size());
+
+    // Total As:                   36%
+    // Total Bs:                   27%
+    outFile << setw(26) << left << "Total As: " << right << fixed << setprecision(0) << setw(4) << aCnt * 100 << "%" << endl;
+    outFile << setw(26) << left << "Total Bs: " << right << fixed << setprecision(0) << setw(4) << bCnt * 100 << "%" << endl;
+    outFile << setw(26) << left << "Total Cs: " << right << fixed << setprecision(0) << setw(4) << cCnt * 100 << "%" << endl;
+    outFile << setw(26) << left << "Total Ds: " << right << fixed << setprecision(0) << setw(4) << dCnt * 100 << "%" << endl;
+    outFile << setw(26) << left << "Total Fs: " << right << fixed << setprecision(0) << setw(4) << fCnt * 100 << "%" << endl;
+
+    outFile << setw(78) << setfill('=') << "" << setfill(' ') << endl;
     outFile.close();
 
     cout << "Report generated successfully.\n";

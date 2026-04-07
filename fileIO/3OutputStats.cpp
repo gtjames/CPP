@@ -88,7 +88,7 @@ bool compareStudents(const Student& a, const Student& b) {
 int main() {
     vector<Student> students;
     string inputFile, outputFile;
-    double highest, lowest, classAvg;
+    // double highest, lowest, classAvg;
     
     // Prompt for input file
     cout << "Enter input file name: ";
@@ -142,7 +142,7 @@ int main() {
     for (const auto& stu : students) {
         outFile << left << setw(12) << stu.firstName
                 << setw(12) << stu.lastName
-                << setw(6) << stu.test1
+                << right << setw(6) << stu.test1
                 << setw(6) << stu.test2
                 << setw(6) << stu.test3
                 << setw(6) << stu.test4
