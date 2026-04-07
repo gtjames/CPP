@@ -143,9 +143,9 @@ int main() {
 
     //  find ave, max and min for each test
     for (int i = 0; i < 4; ++i) {
-        metrics[i].average = accumulate (students.begin(), students.end(), 0.0, [i](double sum, const Student& s) { return sum + s.test[i]; }) / students.size();
-        metrics[i].max     = max_element(students.begin(), students.end(), [i](const Student& a, const Student& b) { return a.test[i] < b.test[i]; })->test[i];
-        metrics[i].min     = min_element(students.begin(), students.end(), [i](const Student& a, const Student& b) { return a.test[i] < b.test[i]; })->test[i];
+        metrics[i].average = accumulate (students.begin(), students.end(), 0.0, [i](double sum,       const Student& s) { return sum + s.test[i]; }) / students.size();
+        metrics[i].max     = max_element(students.begin(), students.end(),      [i](const Student& a, const Student& b) { return a.test[i] < b.test[i]; })->test[i];
+        metrics[i].min     = min_element(students.begin(), students.end(),      [i](const Student& a, const Student& b) { return a.test[i] < b.test[i]; })->test[i];
     }
 
     outFile << setw(30) << left << "Class Average: " << right << fixed << setprecision(2) << setw(8) << metrics[0].average << setw(8) << metrics[1].average << setw(8) << metrics[2].average << setw(8) << metrics[3].average << endl;
