@@ -54,8 +54,12 @@ struct Metric {
 };
 
 // Function to determine letter grade
+// ((int)avg / -10) + 10 + 'A' is a clever way to convert average to letter grade 
+// without multiple if-else statements, but it can be less readable. 
+// The if-else approach is more straightforward and easier to understand for most programmers.
 char getGrade(double avg) {
-    if      (avg >= 90) return 'A';
+//    cout << avg << " " << (char)(((int)avg / -10) + 9 + 'A') << endl; // Debugging line to show the calculated grade
+    if      (avg >= 90) return 'A';     
     else if (avg >= 80) return 'B';
     else if (avg >= 70) return 'C';
     else if (avg >= 60) return 'D';
@@ -70,6 +74,7 @@ bool compareStudents(const Student& a, const Student& b) {
 int main() {
     vector<Student> students;
     vector<Metric> metrics(4); // One metric for each test
+    int letterGrade[6] = {0}; // A, B, C, D, 'E', F counts
     string inputFile, outputFile;
     
     // Prompt for input file
@@ -90,6 +95,7 @@ int main() {
                   >> s.test[0] >> s.test[1] >> s.test[2] >> s.test[3]) {
         s.average = accumulate(begin(s.test), end(s.test), 0.0) / 4.0;
         s.grade = getGrade(s.average);
+        letterGrade[s.grade-'A']++;
 
         students.push_back(s);
     }
@@ -119,7 +125,6 @@ int main() {
             << setw(8) << "T4"
             << setw(8) << "Average"
             << setw(8) << "Grade" << endl;
-        
     outFile << setw(78) << setfill('=') << "" << setfill(' ') << endl;
 
     // Write student data
@@ -148,15 +153,12 @@ int main() {
     outFile << setw(30) << left << "Class Min: "     << right << setw(8) << metrics[0].min << setw(8) << metrics[1].min  << setw(8) <<  metrics[2].min << setw(8) <<  metrics[3].min << endl;
     outFile << setw(78) << setfill('=') << "" << setfill(' ') << endl;
 
-    int cnt[6] = {0}; // A, B, C, D, 'E', F counts
-    for (const auto& s : students) {
-        cnt[s.grade-'A']++;
-    }
-
+    // Show letter grades
     for (int i = 0; i < 6; ++i) {
         if (i == 4) continue; // Skip 'E' grade
-        cnt[i] = (static_cast<double>(cnt[i]) / static_cast<double>(students.size())) * 100; // Convert to percentage
-        outFile << setw(26) << left << "Total " << static_cast<char>('A' + i) << "s: " << right << fixed << setprecision(0) << setw(4) << cnt[i] << "%" << endl;
+        letterGrade[i] = (static_cast<double>(letterGrade[i]) / static_cast<double>(students.size())) * 100; // Convert to percentage
+        string gradeLabel = "Total " + string(1, 'A' + i) + "s: ";
+        outFile << setw(26) << left << gradeLabel << right << fixed << setprecision(0) << setw(4) << letterGrade[i] << "%" << endl;
     }
 
     outFile << setw(78) << setfill('=') << "" << setfill(' ') << endl;
