@@ -21,7 +21,7 @@ int main() {
     cout << "Enter student name: ";
     getline(cin, name);
 
-    // Lookup
+    // Lookup student name in map and display classes
     auto it = studentClasses.find(name);
 
     if (it != studentClasses.end()) {

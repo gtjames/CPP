@@ -32,7 +32,7 @@ char getGrade(double avg) {
     else if (avg >= 80) return 'B';
     else if (avg >= 70) return 'C';
     else if (avg >= 60) return 'D';
-    else return 'F';
+    else                return 'F';
 }
 
 int main() {
@@ -61,6 +61,6 @@ int main() {
 
     inFile.close();
     for_each(begin(students), end(students), [](Student& s) {
-        cout << setw(10) << s.firstName << " " << setw(6) << s.average << " " << s.grade << endl;
+        cout << setw(10) << s.firstName << " " << setw(6) << setprecision(4) << s.average << " " << s.grade << endl;
     });
 }
