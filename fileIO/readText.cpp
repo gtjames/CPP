@@ -71,6 +71,6 @@ int main() {
            cout << fileText << endl; // Print the line to the console
         }
     }
-    cout << "Lines: " << lineCnt << ", Words: " << wordCnt << ", Characters: " << charCnt << std::endl;
+    cout << "# Lines: " << lineCnt << ", Words: " << wordCnt << ", Characters: " << charCnt << std::endl;
     inFile.close();
 }

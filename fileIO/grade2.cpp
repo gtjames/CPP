@@ -95,7 +95,7 @@ int main() {
                   >> s.test[0] >> s.test[1] >> s.test[2] >> s.test[3]) {
         s.average = accumulate(begin(s.test), end(s.test), 0.0) / 4.0;
         s.grade = getGrade(s.average);
-        letterGrade[s.grade-'A']++;
+        letterGrade[s.grade-'A']++;         // Increment count for the letter grade (A=0, B=1, C=2, D=3, E=4, F=5)
 
         students.push_back(s);
     }
