@@ -1,6 +1,5 @@
 *.yml
 *.plist
-.DS_Store
 *.vscode
 *.o
 *.exe
