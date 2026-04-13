@@ -5,7 +5,7 @@
 #include <fstream>
 #include <algorithm>
 #include </opt/homebrew/include/mysqlx/xdevapi.h>
-
+ 
 using namespace std;
 using namespace mysqlx;
 
@@ -22,7 +22,10 @@ int main() {
     vector<Crime> crimes;
 
     try {
-        Session session("localhost", 33060, "root", "!Anguilla76");
+        const char* dbUser = std::getenv("DB_USER");
+        const char* dbPassword = std::getenv("DB_PASSWORD");
+
+        Session session("localhost", 33060, dbUser, dbPassword);
 
         Schema db = session.getSchema("examples");
         Table crimesTable = db.getTable("crimes");
