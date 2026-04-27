@@ -8,7 +8,7 @@
 // using namespace std;
 
 //  NOTE: define a student struct to hold student data
-struct student {
+struct Student {
 	std::string name;        //  NOTE: needs include <string> and eitiher std::string or using namespace std;
 	int age;
 	std::string zip;
@@ -17,9 +17,18 @@ struct student {
 
 int main () {
     //  NOTE: create a stident struct and a map to hold students by name
-    student s;
-    std::map <std::string, student> stMap;  // NOTE: needs include <map> and std::map or using namespace std;
+    Student s;
+    std::map <std::string, Student> stMap;  // NOTE: needs include <map> and std::map or using namespace std;
     std::set <std::string> zips;            // NOTE: needs include <set> and std::vector or using namespace std;
+
+
+    // NOTE: create an array of students and store in the map
+    // Student students[] = {
+    //     {"bobby", 81501, 22, "comp sci"},
+    //     {"alice", 81504, 21, "european history"},
+    //     {"susan", 81503, 23, "mass marketing"},
+    //     {"gary", 81502, 19, "alien biology"}
+    // };
 
     // NOTE: then read students from a file and store in the map
     std::ifstream ifs("lego.txt");          //  needs include <fstream> and std::ifstream or using namespace std;
@@ -57,7 +66,7 @@ int main () {
     //  print all students
     std::cout << "\nAll students:\n";
     for (const auto& pair : stMap) {
-        const student& s = pair.second;
+        const Student& s = pair.second;
         ofs << pair.first << " " << s.zip << " " << s.age << " " << s.major << std::endl;
         //  NOTE: the we use pair.first to show the key and NOT s.name because the key is the name
         //  and the value is the student struct which also has a name field but was never initialized
@@ -74,7 +83,7 @@ int main () {
     //  NOTE: accumulate example - compute average age of students
     //  needs include <numeric>
     float aveAge = accumulate(stMap.begin(), stMap.end(), 0.0,
-            [](double sum, const std::pair<std::string, student>& p)
+            [](double sum, const std::pair<std::string, Student>& p)
                 { return sum + p.second.age; }) / stMap.size();
     std::cout << "\nAverage age: " << aveAge << std::endl;
     return 0;
