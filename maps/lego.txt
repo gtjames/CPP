@@ -1,0 +1,4 @@
+bobby   81501   22  "comp sci"
+alice   81504   21  "european history"
+susan   81503   23  "mass marketing"
+gary    81502   19  "alien biology"

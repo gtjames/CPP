@@ -9,6 +9,9 @@ TARGETS = $(SRCS:.cpp=)
 
 all: $(TARGETS)
 
+select: select.cpp
+	$(CXX) $(CXXFLAGS) select.cpp -o select -I/opt/homebrew/include -L/opt/homebrew/lib -lmysqlcppconnx
+
 mySQL: mySQL.cpp
 	$(CXX) $(CXXFLAGS) mySQL.cpp -o mySQL -I/opt/homebrew/include -L/opt/homebrew/lib -lmysqlcppconnx
 

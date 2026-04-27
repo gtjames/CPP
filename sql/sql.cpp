@@ -34,7 +34,7 @@ int main(int argc, char *argv[]) {
             Schema db = session.getSchema(dbName);
 
             vector<std::string> tableNames = db.getTableNames();
-            cout << "Tables in schema '" << dbName << "':" << endl;
+            cout << "Tables in schema: '" << dbName << "':" << endl;
             for (const std::string& name : tableNames) {
                 cout << " - " << name << endl;
             }

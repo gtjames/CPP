@@ -14,7 +14,7 @@ int main() {
         string line;
         getline(cin, line);
         
-        size_t pos = line.find(" says ");
+        size_t pos = line.find(" goes ");
         if (pos != string::npos) {
             string sound = line.substr(pos + 6);
             foxSounds.insert(sound);
