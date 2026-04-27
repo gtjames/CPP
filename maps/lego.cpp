@@ -70,7 +70,7 @@ int main () {
         ofs << pair.first << " " << s.zip << " " << s.age << " " << s.major << std::endl;
         //  NOTE: the we use pair.first to show the key and NOT s.name because the key is the name
         //  and the value is the student struct which also has a name field but was never initialized
-        std::cout << pair.first << " " << s.zip << " " << s.age << " " << s.major << std::endl;
+        std::cout << pair.first << ": " << s.name << " " << s.zip << " " << s.age << " " << s.major << std::endl;
     }
     ofs.close();
 
